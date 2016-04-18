@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'SwiftSortedList_Example', :exclusive => true do
+  pod 'SwiftSortedList', :path => '../'
+end
+
+target 'SwiftSortedList_Tests', :exclusive => true do
+  pod 'SwiftSortedList', :path => '../'
+
+  
+end
