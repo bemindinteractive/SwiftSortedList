@@ -1,0 +1,24 @@
+{
+  "name": "SwiftSortedList",
+  "version": "0.1.0",
+  "summary": "A short description of SwiftSortedList.",
+  "description": "",
+  "homepage": "https://github.com/<GITHUB_USERNAME>/SwiftSortedList",
+  "license": "MIT",
+  "authors": {
+    "Alessandro Miliucci": "lifeisfoo@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/<GITHUB_USERNAME>/SwiftSortedList.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "SwiftSortedList/Classes/**/*",
+  "resource_bundles": {
+    "SwiftSortedList": [
+      "SwiftSortedList/Assets/*.png"
+    ]
+  }
+}

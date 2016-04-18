@@ -1,0 +1,14 @@
+PODS:
+  - SwiftSortedList (0.1.0)
+
+DEPENDENCIES:
+  - SwiftSortedList (from `../`)
+
+EXTERNAL SOURCES:
+  SwiftSortedList:
+    :path: ../
+
+SPEC CHECKSUMS:
+  SwiftSortedList: b9f70c50fbb40d323711bd6c7542cfd679028207
+
+COCOAPODS: 0.39.0
