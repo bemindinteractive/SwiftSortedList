@@ -7,3 +7,10 @@ deployment:
     tag: /.*/
     commands:
       - pod trunk push
+
+test:
+  override:
+    - xctool
+      -workspace Example/SwiftSortedList.xcworkspace 
+      -scheme "SwiftSortedList-Example"
+      build build-tests run-tests
