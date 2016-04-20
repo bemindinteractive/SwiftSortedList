@@ -51,7 +51,7 @@ public struct SortedList<T: Comparable> {
         // - slist elements 0->n-1 are already sorted
         // - only the last element (n) ins't sorted
         
-        var index = slist.count-1
+        let index = slist.count-1
         for idx in Array(1.stride(through: index, by: 1).reverse()) {
             if self.slist[idx] == self.slist[idx-1] {
                 break // fast exit
