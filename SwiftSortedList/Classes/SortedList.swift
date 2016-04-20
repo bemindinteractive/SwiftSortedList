@@ -26,9 +26,39 @@ public struct SortedList<T: Comparable> {
         }
     }
     
-    public mutating func addElement(el: T) {
+    public mutating func addElementSwiftSort(el: T) {
         slist.append(el)
         slist.sortInPlace()
+    }
+    
+    public mutating func addElements(els: [T]) {
+        slist.appendContentsOf(els)
+        slist.sortInPlace()
+    }
+
+    
+    public mutating func addElement(el: T) {
+        slist.append(el)
+        
+        //
+        // SORT ADDED ELEMENT
+        //
+        
+        // nothing to order
+        if (self.slist.count == 1 || self.slist.count == 0) { return }
+        
+        // otherwise sort, preconditions:
+        // - slist elements 0->n-1 are already sorted
+        // - only the last element (n) ins't sorted
+        
+        var index = slist.count-1
+        for idx in Array(1.stride(through: index, by: 1).reverse()) {
+            if self.slist[idx] == self.slist[idx-1] {
+                break // fast exit
+            } else if self.slist[idx] < self.slist[idx-1] {
+                swap(&self.slist[idx], &self.slist[idx-1])
+            }
+        }
     }
     
     public mutating func removeElement(el: T) -> T? {

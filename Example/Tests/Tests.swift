@@ -231,11 +231,59 @@ class Tests: XCTestCase {
         XCTAssertLessThan(pq[3].id, pq[4].id)
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
+    func testPerformanceBulkAdd() {
         self.measureBlock() {
             // Put the code you want to measure the time of here.
+            var pq = SortedList<MyObj>()
+            var tmp = [MyObj]()
+            var m: MyObj
+            for i in (1...1000).reverse() {
+                m = MyObj(id: i)
+                tmp.append(m)
+            }
+            pq.addElements(tmp)
+            XCTAssertLessThan(pq[0].id, pq[1].id)
+            XCTAssertLessThan(pq[1].id, pq[2].id)
+            XCTAssertLessThan(pq[pq.count-3].id, pq[pq.count-2].id)
+            XCTAssertLessThan(pq[pq.count-2].id, pq[pq.count-1].id)
         }
+        
+    }
+    
+    func testPerformanceInternalSort1000() {
+        self.measureBlock() {
+            // Put the code you want to measure the time of here.
+            var pq = SortedList<MyObj>()
+            var m: MyObj
+            for i in (1...1000).reverse() {
+                m = MyObj(id: i)
+                pq.addElement(m)
+            }
+            
+            XCTAssertLessThan(pq[0].id, pq[1].id)
+            XCTAssertLessThan(pq[1].id, pq[2].id)
+            XCTAssertLessThan(pq[pq.count-3].id, pq[pq.count-2].id)
+            XCTAssertLessThan(pq[pq.count-2].id, pq[pq.count-1].id)
+        }
+        
+    }
+    
+    func testPerformanceSwiftSort1000() {
+        self.measureBlock() {
+            // Put the code you want to measure the time of here.
+            var pq = SortedList<MyObj>()
+            var m: MyObj
+            for i in (1...1000).reverse() {
+                m = MyObj(id: i)
+                pq.addElementSwiftSort(m)
+            }
+            
+            XCTAssertLessThan(pq[0].id, pq[1].id)
+            XCTAssertLessThan(pq[1].id, pq[2].id)
+            XCTAssertLessThan(pq[pq.count-3].id, pq[pq.count-2].id)
+            XCTAssertLessThan(pq[pq.count-2].id, pq[pq.count-1].id)
+        }
+        
     }
     
 }
