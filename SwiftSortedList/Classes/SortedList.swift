@@ -94,20 +94,6 @@ public struct SortedList<T: Comparable> {
 // TODO: test all extensions
 //
 
-// MARK: - GeneratorType
-extension SortedList: GeneratorType {
-    
-    public typealias Element = T
-    mutating public func next() -> Element? { return self.next() }
-}
-
-// MARK: - SequenceType
-extension SortedList: SequenceType {
-    
-    public typealias Generator = SortedList
-    public func generate() -> Generator { return self }
-}
-
 // MARK: - CollectionType
 extension SortedList: CollectionType {
     

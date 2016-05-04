@@ -286,4 +286,16 @@ class Tests: XCTestCase {
         
     }
     
+    func testFor() {
+        var pq = SortedList<MyObj>()
+        var m: MyObj
+        for i in (1...10).reverse() {
+            m = MyObj(id: i)
+            pq.addElementSwiftSort(m)
+        }
+        for el in pq.array {
+            XCTAssertNotNil(el)
+        }
+    }
+    
 }
