@@ -55,6 +55,12 @@ let elements: [MyObj] = sl.array
 sl.removeElement(mo)
 
 
+// replace an object
+let mo3 = MyObj(id: 3)
+sl.replace(at: 0, with: mo3)
+print(mo2 == sl[0]) // false
+print(mo3 == sl[0]) // true
+
 // loop
 
 for el in sl.array {

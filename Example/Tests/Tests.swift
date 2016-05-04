@@ -298,4 +298,14 @@ class Tests: XCTestCase {
         }
     }
     
+    func testReplace() {
+        var pq = SortedList<MyObj>()
+        let o1 = MyObj(id: 100)
+        pq.addElement(o1)
+        let o2 = MyObj(id: 200)
+        pq.replace(at: 0, with: o2)
+        XCTAssertEqual(o2, pq[0])
+        XCTAssertThrowsError(try pq.getAt(1))
+    }
+    
 }

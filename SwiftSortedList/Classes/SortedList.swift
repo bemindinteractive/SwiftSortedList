@@ -26,17 +26,37 @@ public struct SortedList<T: Comparable> {
         }
     }
     
+    
+    /**
+     Add an element to the list and re-sort the list using Swift `sortInPlace` function
+     
+     - Parameter el:   The element to add.
+     */
     public mutating func addElementSwiftSort(el: T) {
         slist.append(el)
         slist.sortInPlace()
     }
     
+    
+    /**
+     Add an array of elements to the list and re-sort the list using Swift `sortInPlace` function
+     
+     - Parameter [el]:    Elements to add.
+     */
     public mutating func addElements(els: [T]) {
         slist.appendContentsOf(els)
         slist.sortInPlace()
     }
 
     
+    /**
+     Add an element to the list and re-sort the list using a interna function
+     
+     - Parameter el:   The element to add.
+     
+     - Complexity: O(n), it uses a bubble-sort like algorithm moving up
+        only the added element
+     */
     public mutating func addElement(el: T) {
         slist.append(el)
         
@@ -61,6 +81,14 @@ public struct SortedList<T: Comparable> {
         }
     }
     
+    
+    /**
+     Remove an `element` from the list.
+     
+     - Parameter el:   The element to remove.
+     
+     - Returns: The removed element or nil if it is not present in the list.
+     */
     public mutating func removeElement(el: T) -> T? {
         var indexToRemove = -1
         for (index, element) in slist.enumerate() {
@@ -76,6 +104,28 @@ public struct SortedList<T: Comparable> {
         }
     }
     
+    /**
+     Remove the current element `at` given index and insert the specified `element`.
+     
+     - Parameter at: The index of the element to remove.
+     - Parameter element: The element to insert.
+     */
+    public mutating func replace(at index: Int, with element: T) {
+        slist.removeAtIndex(index)
+        self.addElement(element)
+    }
+    
+    
+    /**
+     Get the element at `index` from the list.
+     
+     - Parameter indexl:   The index of the element.
+     
+     - Throws: `SortedListError.InvalidIndex` if the `index` parameter
+     is out of range.
+     
+     - Returns: The element at `index` position.
+     */
     public mutating func getAt(index: Int) throws -> T? {
         if slist.count >= index+1 {
             return slist[index]
