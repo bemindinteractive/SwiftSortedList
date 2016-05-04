@@ -26,18 +26,40 @@ func <(x: MyObj, y: MyObj) -> Bool {
 Then you can use the SortedList:
 
 ```
-var sl = SortedList<MyObj>()
-let mo = MyObj(id: 1)
+// create a new sorted list
 
+var sl = SortedList<MyObj>()
+
+
+// add an object
+
+let mo = MyObj(id: 1)
 sl.addElement(mo)
+
+
+// get an object
 
 let mo2 = sl.getAt(0)
 let mo2s = sl[0]
 print(mo2 == mo2s)
 
+
+// helpers functions
+
 let size: Int = sl.count
 let elements: [MyObj] = sl.array
+
+
+// remove an object
+
 sl.removeElement(mo)
+
+
+// loop
+
+for el in sl.array {
+    // do something with el
+}
 
 ```
 
