@@ -126,7 +126,7 @@ public struct SortedList<T: Comparable> {
      
      - Returns: The element at `index` position.
      */
-    public mutating func getAt(index: Int) throws -> T? {
+    public func getAt(index: Int) throws -> T? {
         if slist.count >= index+1 {
             return slist[index]
         } else {
