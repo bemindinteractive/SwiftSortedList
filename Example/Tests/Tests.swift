@@ -232,12 +232,12 @@ class Tests: XCTestCase {
     }
     
     func testPerformanceBulkAdd() {
-        self.measureBlock() {
+        self.measure() {
             // Put the code you want to measure the time of here.
             var pq = SortedList<MyObj>()
             var tmp = [MyObj]()
             var m: MyObj
-            for i in (1...1000).reverse() {
+            for i in (1...1000).reversed() {
                 m = MyObj(id: i)
                 tmp.append(m)
             }
@@ -251,11 +251,11 @@ class Tests: XCTestCase {
     }
     
     func testPerformanceInternalSort1000() {
-        self.measureBlock() {
+        self.measure() {
             // Put the code you want to measure the time of here.
             var pq = SortedList<MyObj>()
             var m: MyObj
-            for i in (1...1000).reverse() {
+            for i in (1...1000).reversed() {
                 m = MyObj(id: i)
                 pq.addElement(m)
             }
@@ -269,11 +269,11 @@ class Tests: XCTestCase {
     }
     
     func testPerformanceSwiftSort1000() {
-        self.measureBlock() {
+        self.measure() {
             // Put the code you want to measure the time of here.
             var pq = SortedList<MyObj>()
             var m: MyObj
-            for i in (1...1000).reverse() {
+            for i in (1...1000).reversed() {
                 m = MyObj(id: i)
                 pq.addElementSwiftSort(m)
             }
@@ -289,7 +289,7 @@ class Tests: XCTestCase {
     func testFor() {
         var pq = SortedList<MyObj>()
         var m: MyObj
-        for i in (1...10).reverse() {
+        for i in (1...10).reversed() {
             m = MyObj(id: i)
             pq.addElementSwiftSort(m)
         }

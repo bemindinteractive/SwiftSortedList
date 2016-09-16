@@ -6,14 +6,14 @@
 //
 //
 
-enum SortedListError: ErrorType {
-    case InvalidIndex
+enum SortedListError: Error {
+    case invalidIndex
 }
 
 public struct SortedList<T: Comparable> {
     
-    private var slist = [T]()
-    private let lazy: Bool
+    fileprivate var slist = [T]()
+    fileprivate let lazy: Bool
     
     // TODO: test thread safe and add a lock or a sync mode
     
@@ -32,9 +32,9 @@ public struct SortedList<T: Comparable> {
      
      - Parameter el:   The element to add.
      */
-    public mutating func addElementSwiftSort(el: T) {
+    public mutating func addElementSwiftSort(_ el: T) {
         slist.append(el)
-        slist.sortInPlace()
+        slist.sort()
     }
     
     
@@ -43,9 +43,9 @@ public struct SortedList<T: Comparable> {
      
      - Parameter [el]:    Elements to add.
      */
-    public mutating func addElements(els: [T]) {
-        slist.appendContentsOf(els)
-        slist.sortInPlace()
+    public mutating func addElements(_ els: [T]) {
+        slist.append(contentsOf: els)
+        slist.sort()
     }
 
     
@@ -57,7 +57,7 @@ public struct SortedList<T: Comparable> {
      - Complexity: O(n), it uses a bubble-sort like algorithm moving up
         only the added element
      */
-    public mutating func addElement(el: T) {
+    public mutating func addElement(_ el: T) {
         slist.append(el)
         
         //
@@ -72,7 +72,7 @@ public struct SortedList<T: Comparable> {
         // - only the last element (n) ins't sorted
         
         let index = slist.count-1
-        for idx in Array(1.stride(through: index, by: 1).reverse()) {
+        for idx in Array(stride(from: 1, through: index, by: 1).reversed()) {
             if self.slist[idx] == self.slist[idx-1] {
                 break // fast exit
             } else if self.slist[idx] < self.slist[idx-1] {
@@ -89,16 +89,16 @@ public struct SortedList<T: Comparable> {
      
      - Returns: The removed element or nil if it is not present in the list.
      */
-    public mutating func removeElement(el: T) -> T? {
+    public mutating func removeElement(_ el: T) -> T? {
         var indexToRemove = -1
-        for (index, element) in slist.enumerate() {
+        for (index, element) in slist.enumerated() {
             if element == el {
                 indexToRemove = index
             }
         }
         if indexToRemove != -1 {
             // no need to compact the array, swift arrays do this automatically
-            return slist.removeAtIndex(indexToRemove)
+            return slist.remove(at: indexToRemove)
         } else {
             return nil
         }
@@ -111,7 +111,7 @@ public struct SortedList<T: Comparable> {
      - Parameter element: The element to insert.
      */
     public mutating func replace(at index: Int, with element: T) {
-        slist.removeAtIndex(index)
+        slist.remove(at: index)
         self.addElement(element)
     }
     
@@ -126,11 +126,11 @@ public struct SortedList<T: Comparable> {
      
      - Returns: The element at `index` position.
      */
-    public func getAt(index: Int) throws -> T? {
+    public func getAt(_ index: Int) throws -> T? {
         if slist.count >= index+1 {
             return slist[index]
         } else {
-            throw SortedListError.InvalidIndex
+            throw SortedListError.invalidIndex
         }
     }
     
@@ -145,7 +145,7 @@ public struct SortedList<T: Comparable> {
 //
 
 // MARK: - CollectionType
-extension SortedList: CollectionType {
+extension SortedList: Collection {
     
     public typealias Index = Int
     
@@ -153,6 +153,11 @@ extension SortedList: CollectionType {
     public var endIndex: Int { return slist.endIndex }
     
     public subscript(i: Int) -> T { return slist[i] }
+    
+    // IndexableBase fix with swift 3.0
+    public func index(after i: Int) -> Int {
+        return i+1
+    }
 }
 
 // MARK: - CustomStringConvertible, CustomDebugStringConvertible
